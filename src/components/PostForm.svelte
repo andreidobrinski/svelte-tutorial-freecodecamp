@@ -43,3 +43,12 @@
     <div class="indeterminate" />
   </div>
 {/if}
+
+<style>
+  form {
+    margin: 50px;
+  }
+  .progress {
+    margin: 100px 0;
+  }
+</style>
