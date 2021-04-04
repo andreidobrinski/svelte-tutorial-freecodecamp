@@ -6,13 +6,20 @@
   const apiBase = "https://ndb99xkpdk.execute-api.eu-west-2.amazonaws.com/dev";
 
   let posts = [];
+  let editingPost = {
+    body: "",
+    title: "",
+    id: null,
+  };
 
   onMount(async () => {
     const res = await fetch(apiBase + "/posts");
     posts = await res.json();
   });
 
-  function editPost(post) {}
+  function editPost(post) {
+    editingPost = post;
+  }
 
   function deletePost(id) {
     if (confirm("Are you sure?")) {
@@ -35,7 +42,7 @@
 
 <div class="row">
   <div class="col s6">
-    <PostForm on:postCreated={addPost} />
+    <PostForm on:postCreated={addPost} {editingPost} />
   </div>
 </div>
 <div class="row">

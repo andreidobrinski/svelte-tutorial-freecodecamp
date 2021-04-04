@@ -3,8 +3,10 @@
 
   const dispatch = createEventDispatcher();
 
-  let title = "";
-  let body = "";
+  export let editingPost;
+
+  $: title = editingPost.title;
+  $: body = editingPost.body;
   let loading = false;
 
   const apiBase = "https://ndb99xkpdk.execute-api.eu-west-2.amazonaws.com/dev";
@@ -42,7 +44,9 @@
       <label for="body">Body</label>
       <input type="text" bind:value={body} />
     </div>
-    <button type="submit" class="waves-effect waves-light btn"> Add </button>
+    <button type="submit" class="waves-effect waves-light btn">
+      {editingPost.id ? "Update" : "Add"}
+    </button>
   </form>
 {:else}
   <div class="progress">
