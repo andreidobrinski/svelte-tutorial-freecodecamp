@@ -14,7 +14,19 @@
 
   function editPost(post) {}
 
-  function deletePost(id) {}
+  function deletePost(id) {
+    if (confirm("Are you sure?")) {
+      fetch(`${apiBase}/post/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then(() => {
+          posts = posts.filter((p) => p.id !== id);
+        });
+    }
+  }
 
   function addPost({ detail: post }) {
     posts = [post, ...posts];
