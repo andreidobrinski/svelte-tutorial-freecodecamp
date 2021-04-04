@@ -15,11 +15,15 @@
   function editPost(post) {}
 
   function deletePost(id) {}
+
+  function addPost({ detail: post }) {
+    posts = [post, ...posts];
+  }
 </script>
 
 <div class="row">
   <div class="col s6">
-    <PostForm />
+    <PostForm on:postCreated={addPost} />
   </div>
 </div>
 <div class="row">
