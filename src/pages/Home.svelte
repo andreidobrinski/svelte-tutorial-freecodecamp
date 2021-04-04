@@ -1,6 +1,8 @@
 <script>
   import { onMount } from "svelte";
 
+  import PostForm from "../components/PostForm.svelte";
+
   const apiBase = "https://ndb99xkpdk.execute-api.eu-west-2.amazonaws.com/dev";
 
   let posts = [];
@@ -9,8 +11,17 @@
     const res = await fetch(apiBase + "/posts");
     posts = await res.json();
   });
+
+  function editPost(post) {}
+
+  function deletePost(id) {}
 </script>
 
+<div class="row">
+  <div class="col s6">
+    <PostForm />
+  </div>
+</div>
 <div class="row">
   {#if posts.length === 0}
     <h1>loading posts...</h1>
@@ -24,8 +35,10 @@
             <p>{post.body}</p>
           </div>
           <div class="card-action">
-            <a href="#">Edit</a>
-            <a href="#" class="delete-btn">Delete</a>
+            <a href="#" on:click={() => editPost(post)}>Edit</a>
+            <a href="#" class="delete-btn" on:click={() => deletePost(post.id)}>
+              Delete
+            </a>
           </div>
         </div>
       </div>
