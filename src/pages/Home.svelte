@@ -5,6 +5,8 @@
 
   const apiBase = "https://ndb99xkpdk.execute-api.eu-west-2.amazonaws.com/dev";
 
+  let postLimit = 6;
+
   let posts = [];
   let editingPost = {
     body: "",
@@ -51,11 +53,28 @@
       id: null,
     };
   }
+
+  function setLimit() {
+    fetch(`${apiBase}/posts/${postLimit}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((postsData) => {
+        posts = postsData;
+      });
+  }
 </script>
 
 <div class="row">
   <div class="col s6">
     <PostForm on:postCreated={addPost} {editingPost} />
+  </div>
+  <div class="col s3" style="margin: 50px;">
+    <p>Limit number of posts</p>
+    <input type="number" bind:value={postLimit} />
+    <button on:click={setLimit} class="waves-effect waves-light btn">
+      Set
+    </button>
   </div>
 </div>
 <div class="row">
