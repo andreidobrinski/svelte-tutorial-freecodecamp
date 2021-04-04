@@ -36,7 +36,20 @@
   }
 
   function addPost({ detail: post }) {
-    posts = [post, ...posts];
+    if (posts.find((p) => p.id === post.id)) {
+      const index = posts.findIndex((p) => p.id === post.id);
+      let postsUpdated = posts;
+      postsUpdated.splice(index, 1, post);
+      posts = postsUpdated;
+    } else {
+      posts = [post, ...posts];
+    }
+
+    editingPost = {
+      body: "",
+      title: "",
+      id: null,
+    };
   }
 </script>
 

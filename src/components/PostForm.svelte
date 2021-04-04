@@ -38,7 +38,8 @@
 
     const post = await res.JSON();
     dispatch("postCreated", post);
-    title = body = "";
+    // removed. resetting from home component
+    // title = body = "";
     loading = false;
   }
 </script>
